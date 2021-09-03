@@ -1,0 +1,61 @@
+{
+  "source": {
+	"exclude": ["doc","notUsed"  ],
+	"includePattern": ".js$",
+	"excludePattern": "(node_modules/|notUsed|patch.*$|docs?/|__.js$)"
+  },
+
+  "plugins": ["plugins/markdown"],
+
+  "docdash": {
+	"static":true,
+	"sort":true,
+	"sectionOrder": [
+	  "Classes",
+	  "Modules",
+	  "Externals",
+	  "Events",
+	  "Namespaces",
+	  "Mixins",
+	  "Tutorials",
+	  "Interfaces"
+	],
+	"disqus": "",
+	"openGraph": {
+	  "title": "",
+	  "type": "website",
+	  "image": "",
+	  "site_name": "",
+	  "url": ""
+	},
+	"meta": {
+	  "title": "",
+	  "description": "",
+	  "keyword": ""
+	},
+	"search": true,
+	"commonNav": true,
+	"collapse": true,
+	"wrap":true,
+	"typedefs":true,
+	"navLevel":1,
+	"private":true ,
+	"removeQuotes": "none",
+	"scripts": [],
+
+	"scopeInOutputPath":true,
+	"nameInOutputPath":true ,
+	"versionInOutputPath":true
+  }
+ ,
+
+  "opts": {
+
+	"destination": "doc",
+	"encoding": "utf8",
+	"recurse": true,
+	"verbose": true,
+	"template": "./node_modules/docdash"
+
+  }
+}

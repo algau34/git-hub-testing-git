@@ -1,0 +1,626 @@
+<html lang="en-US"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>SpineNav</title>
+  <link rel="shortcut icon" href="cwui.ico">
+  <script defer="" src="jsExtd.js"></script>
+  <script defer="" src="Core.js"></script>
+  <script defer="" src="GenericCache.js"></script>
+  <script defer="" src="FileCache.js"></script>
+  <script defer="" src="Vector.js"></script>
+  <script defer="" src="FingerActions.js"></script>
+  <script defer="" src="ImageFrameRate.js"></script>
+  <script defer="" src="OverlayCanvas.js"></script>
+  <link rel="stylesheet" href="vkeyboard/VKeyboard.css">
+  <script defer="" src="vkeyboard/VKeyboard.js"></script>
+  <script defer="" src="cwui.js"></script>
+  <!-- <script src="LocalDevelop.js"></script>-->
+  <script defer="" src="mainCwui.js"></script>
+
+  <link rel="stylesheet" href="cwui.css">
+  <script src="jquery-3.5.1.min.js"></script> <!-- jquery 3.5.1 provided by default -->
+  <link rel="stylesheet" href="asset/css/Common.css">
+  <link rel="stylesheet" href="asset/css/ScCameraViewer.css">
+  <link href="asset/css/ScDialog.css" rel="stylesheet">
+</head>
+<body><div style="z-index: 0; margin: 0px; padding: 0px; overflow: hidden; position: fixed; width: 100%; height: 100%; opacity: 1; transition: all 500ms ease 0s;"><!--add html block -->
+
+  <!-- bind [SpineNavApplicationLib] -->
+  <meta charset="utf-8">
+  <title>WsStartPanel</title>
+  <link rel="stylesheet" href="asset/css/Common.css">
+  <link rel="stylesheet" href="asset/css/main.css">
+  <link rel="stylesheet" href="asset/css/Tabs.css">
+  <link rel="stylesheet" href="asset/css/ZimmerCAS.css">
+  <link rel="stylesheet" href="asset/css/CustomRadioButton.css">
+
+
+
+
+  <!-- Camera viewer -->
+
+
+  <div id="CameraViewerDlg" class="Modal_Screen blue">
+    <div class="CameraViewer_Dlg">
+      <!-- caption -->
+      <div class="CameraViewer_Name"><span></span><span id="ViewerNameTop"></span><span></span></div>
+      <div class="CameraViewer_Name"><span></span><span id="ViewerNameSide"></span><span></span></div>
+      <!--  Top and side  Camera viewer -->
+      <div class="CameraViewer">
+        <img id="topCameraView" alt="Camera Viewer Top" class="CameraViewer_Canvas" src="asset/img/CameraViewerTop.png?n=15">
+      </div>
+      <div class="CameraViewer">
+        <img id="sideCameraView" alt="Camera Viewer Side" class="CameraViewer_Canvas" src="asset/img/CameraViewerSide.png?n=15">
+      </div>
+      <!-- button quit -->
+      <div class="CameraViewer_Button ButtonBar">
+        <button class="StandardButton small" id="CameraViewerCloseBtn">
+          <img alt="x" src="asset/img/ICO_Close.png?n=15">Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="Modal_Screen blue">
+    <div class="Modal_Dlg" id="WorkflowBarModal_Dlg">
+
+
+      <div class="title">new popin modal</div>
+      <div class="left-box-status none" id="WorkflowBariconStatus">
+
+        <div class="timer play">
+          <div id="WorkflowBarCountDownContainer"></div>
+          <div class="spinner-count" id="WorkflowBartimer"></div>
+        </div>
+
+        <div class="warning">
+          <img alt="Warning" src="asset/img/ICO_Warning.svg?n=16">
+        </div>
+        <div class="question">
+          <img alt="Question" src="asset/img/ICO_Question.svg?n=16">
+        </div>
+        <div class="info">
+          <img alt="Info" src="asset/img/ICO_Instruction.svg?n=16">
+        </div>
+        <div class="error">
+          <img alt="Error" src="asset/img/ICO_ExamStatus_Error.svg?n=16">
+        </div>
+
+        <div class="success">
+          <img alt="Success" src="asset/img/UI_CheckMark.svg?n=16">
+        </div>
+
+        <div class="valid">
+          <img alt="valid" src="asset/img/ICO_Checked_Orange.svg?n=16">
+        </div>
+
+        <div class="progress">
+          <img alt="Progress" src="asset/img/ICO_Progress.svg?n=16">
+        </div>
+        <div class="wait play">
+          <div></div>
+          <div class="spinner-count" id="WorkflowBarwait"></div>
+        </div>
+        <div class="input">
+          <img alt="Input" src="asset/img/ICO_Movment.png?n=16">
+        </div>
+      </div>
+
+
+      <div class="Instructions Instructions-1" id="WorkflowBarPrimaryMessage"></div>
+      <div class="Instructions Instructions-2 SuperSmall"><span id="WorkflowBarSecondaryMessage"></span></div>
+
+      <div class="ButtonBar Horizontal ">
+        <button class="StandardButton long-adjust hide"></button>
+      </div>
+    </div>
+  </div>
+
+
+  <link href="asset/css/ScDialog.css" rel="stylesheet">
+
+  <div class="Modal_Screen blue Modal_Screen_On">
+    <div class="Modal_Dlg" id="startModal_Dlg">
+
+
+      <div class="title">failure</div>
+      <div class="left-box-status error" id="starticonStatus">
+
+        <div class="timer play">
+          <div id="startCountDownContainer"></div>
+          <div class="spinner-count" id="starttimer"></div>
+        </div>
+
+        <div class="warning">
+          <img alt="Warning" src="asset/img/ICO_Warning.svg?n=17">
+        </div>
+        <div class="question">
+          <img alt="Question" src="asset/img/ICO_Question.svg?n=17">
+        </div>
+        <div class="info">
+          <img alt="Info" src="asset/img/ICO_Instruction.svg?n=17">
+        </div>
+        <div class="error">
+          <img alt="Error" src="asset/img/ICO_ExamStatus_Error.svg?n=17">
+        </div>
+
+        <div class="success">
+          <img alt="Success" src="asset/img/UI_CheckMark.svg?n=17">
+        </div>
+
+        <div class="valid">
+          <img alt="valid" src="asset/img/ICO_Checked_Orange.svg?n=17">
+        </div>
+
+        <div class="progress">
+          <img alt="Progress" src="asset/img/ICO_Progress.svg?n=17">
+        </div>
+        <div class="wait play">
+          <div></div>
+          <div class="spinner-count" id="startwait"></div>
+        </div>
+        <div class="input">
+          <img alt="Input" src="asset/img/ICO_Movment.png?n=17">
+        </div>
+      </div>
+
+
+      <div class="Instructions Instructions-1" id="startPrimaryMessage">Failed to load formative data</div>
+      <div class="Instructions Instructions-2 SuperSmall"><span id="startSecondaryMessage"></span></div>
+
+      <div class="ButtonBar Horizontal posRight">
+        <button class="StandardButton long-adjust show small" id="startok">Ok</button>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+<div id="virtual-keyboard" style="display: none;"><div class="page"><div class="container top"><div class="header">
+  <div id="virtual-keyboard-cancel" class="button" title="cancel"><img class="icon" src="vkeyboard/cancel.svg"></div>
+  <div id="virtual-keyboard-clear" class="button" title="clear"><img class="icon" src="vkeyboard/clear.svg"></div>
+  <input id="virtual-keyboard-value" class="value" contenteditable="true" type="password">
+  <div id="virtual-keyboard-ok" class="button" title="validate"><img class="icon" src="vkeyboard/ok.svg"></div>
+</div></div><div class="container bottom"><div class="panel left"><div class="row"><div id="virtual-keyboard-key-1" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift1" class="character"><div id="char-virtual-keyboard-key-1" class="lowercase"></div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std1" class="character highlight">`</div>
+    <div id="virtual-keyboard-high-alt1" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-2" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift2" class="character"><div id="char-virtual-keyboard-key-2" class="lowercase">!</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std2" class="character highlight">1</div>
+    <div id="virtual-keyboard-high-alt2" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-3" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift3" class="character"><div id="char-virtual-keyboard-key-3" class="lowercase">"</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std3" class="character highlight">2</div>
+    <div id="virtual-keyboard-high-alt3" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-4" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift4" class="character"><div id="char-virtual-keyboard-key-4" class="lowercase">£</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std4" class="character highlight">3</div>
+    <div id="virtual-keyboard-high-alt4" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-5" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift5" class="character"><div id="char-virtual-keyboard-key-5" class="lowercase">$</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std5" class="character highlight">4</div>
+    <div id="virtual-keyboard-high-alt5" class="character">€</div>
+  </div>
+</div><div id="virtual-keyboard-key-6" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift6" class="character"><div id="char-virtual-keyboard-key-6" class="lowercase">%</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std6" class="character highlight">5</div>
+    <div id="virtual-keyboard-high-alt6" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-7" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift7" class="character"><div id="char-virtual-keyboard-key-7" class="lowercase">^</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std7" class="character highlight">6</div>
+    <div id="virtual-keyboard-high-alt7" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-8" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift8" class="character"><div id="char-virtual-keyboard-key-8" class="lowercase">&amp;</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std8" class="character highlight">7</div>
+    <div id="virtual-keyboard-high-alt8" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-9" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift9" class="character"><div id="char-virtual-keyboard-key-9" class="lowercase">*</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std9" class="character highlight">8</div>
+    <div id="virtual-keyboard-high-alt9" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-10" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift10" class="character"><div id="char-virtual-keyboard-key-10" class="lowercase">(</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std10" class="character highlight">9</div>
+    <div id="virtual-keyboard-high-alt10" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-11" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift11" class="character"><div id="char-virtual-keyboard-key-11" class="lowercase">)</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std11" class="character highlight">0</div>
+    <div id="virtual-keyboard-high-alt11" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-12" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift12" class="character"><div id="char-virtual-keyboard-key-12" class="lowercase">_</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std12" class="character highlight">-</div>
+    <div id="virtual-keyboard-high-alt12" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-13" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift13" class="character"><div id="char-virtual-keyboard-key-13" class="lowercase">+</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std13" class="character highlight">=</div>
+    <div id="virtual-keyboard-high-alt13" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-14" class="key system" style="width: 250%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-14" class="lowercase"><img class="icon" src="vkeyboard/backspace.svg"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-15" class="key disabled" style="width: 200%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-15" class="lowercase"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-16" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-16" class="lowercase">Q</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-17" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-17" class="lowercase">W</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-18" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-18" class="lowercase">E</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-19" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-19" class="lowercase">R</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-20" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-20" class="lowercase">T</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-21" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-21" class="lowercase">Y</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-22" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-22" class="lowercase">U</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-23" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-23" class="lowercase">I</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-24" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-24" class="lowercase">O</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-25" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-25" class="lowercase">P</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-26" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift26" class="character"><div id="char-virtual-keyboard-key-26" class="lowercase">{</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std26" class="character highlight">[</div>
+    <div id="virtual-keyboard-high-alt26" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-27" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift27" class="character"><div id="char-virtual-keyboard-key-27" class="lowercase">}</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std27" class="character highlight">]</div>
+    <div id="virtual-keyboard-high-alt27" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-28" class="key disabled" style="width: 200%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-28" class="lowercase"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-29" class="key system" style="width: 250%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-29" class="lowercase"><div class="lock_panel">
+      <img class="icon" src="vkeyboard/lock.svg">
+      <div class="lock">
+        <div id="virtual-keyboard-key-29lock" class="light"></div>
+      </div>
+    </div></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-30" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-30" class="lowercase">A</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-31" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-31" class="lowercase">S</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-32" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-32" class="lowercase">D</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-33" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-33" class="lowercase">F</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-34" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-34" class="lowercase">G</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-35" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-35" class="lowercase">H</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-36" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-36" class="lowercase">J</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-37" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-37" class="lowercase">K</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-38" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-38" class="lowercase">L</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-39" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift39" class="character"><div id="char-virtual-keyboard-key-39" class="lowercase">:</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std39" class="character highlight">;</div>
+    <div id="virtual-keyboard-high-alt39" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-40" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift40" class="character"><div id="char-virtual-keyboard-key-40" class="lowercase">@</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std40" class="character highlight">'</div>
+    <div id="virtual-keyboard-high-alt40" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-41" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift41" class="character"><div id="char-virtual-keyboard-key-41" class="lowercase">~</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std41" class="character highlight">#</div>
+    <div id="virtual-keyboard-high-alt41" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-42" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-42" class="lowercase"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-43" class="key system" style="width: 200%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-43" class="lowercase"><img class="icon" src="vkeyboard/shift.svg"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-44" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift44" class="character"><div id="char-virtual-keyboard-key-44" class="lowercase">|</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std44" class="character highlight">\</div>
+    <div id="virtual-keyboard-high-alt44" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-45" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-45" class="lowercase">Z</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-46" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-46" class="lowercase">X</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-47" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-47" class="lowercase">C</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-48" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-48" class="lowercase">V</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-49" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-49" class="lowercase">B</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-50" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-50" class="lowercase">N</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-51" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-51" class="lowercase">M</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-52" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift52" class="character"><div id="char-virtual-keyboard-key-52" class="lowercase">&lt;</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std52" class="character highlight">,</div>
+    <div id="virtual-keyboard-high-alt52" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-53" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift53" class="character"><div id="char-virtual-keyboard-key-53" class="lowercase">&gt;</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std53" class="character highlight">.</div>
+    <div id="virtual-keyboard-high-alt53" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-54" class="key" style="width: 100%">
+  <div class="line">
+    <div id="virtual-keyboard-high-shift54" class="character"><div id="char-virtual-keyboard-key-54" class="lowercase">?</div></div>
+    <div class="character"></div>
+  </div>
+  <div class="line">
+    <div id="virtual-keyboard-high-std54" class="character highlight">/</div>
+    <div id="virtual-keyboard-high-alt54" class="character"></div>
+  </div>
+</div><div id="virtual-keyboard-key-55" class="key system" style="width: 300%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-55" class="lowercase"><img class="icon" src="vkeyboard/shift.svg"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-56" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-56" class="lowercase"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-57" class="key system" style="width: 200%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-57" class="lowercase"><img class="icon" src="vkeyboard/alt.svg"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-58" class="key" style="width: 800%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-58" class="lowercase"> </div></div>
+  </div>
+</div><div id="virtual-keyboard-key-59" class="key system" style="width: 200%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-59" class="lowercase"><img class="icon" src="vkeyboard/alt.svg"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-60" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-60" class="lowercase"></div></div>
+  </div>
+</div></div></div><div class="panel right"><div class="row"><div id="virtual-keyboard-key-61" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-61" class="lowercase"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-62" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-62" class="lowercase">/</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-63" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-63" class="lowercase">*</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-64" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-64" class="lowercase">-</div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-65" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-65" class="lowercase">7</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-66" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-66" class="lowercase">8</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-67" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-67" class="lowercase">9</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-68" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-68" class="lowercase">+</div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-69" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-69" class="lowercase">4</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-70" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-70" class="lowercase">5</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-71" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-71" class="lowercase">6</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-72" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-72" class="lowercase"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-73" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-73" class="lowercase">1</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-74" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-74" class="lowercase">2</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-75" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-75" class="lowercase">3</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-76" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-76" class="lowercase"></div></div>
+  </div>
+</div></div><div class="row"><div id="virtual-keyboard-key-77" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-77" class="lowercase">0</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-78" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-78" class="lowercase"></div></div>
+  </div>
+</div><div id="virtual-keyboard-key-79" class="key" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-79" class="lowercase">.</div></div>
+  </div>
+</div><div id="virtual-keyboard-key-80" class="key disabled" style="width: 100%">
+  <div class="line">
+    <div class="character single"><div id="char-virtual-keyboard-key-80" class="lowercase"></div></div>
+  </div>
+</div></div></div></div></div></div>
+
+
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="Core/Core.js" ></script>
+	<script src="components/tools/Tools.js"  ></script>
+	<script src="components/tools/Hughug.js"  ></script>
+	<script>
+		function getCalculatedCss(rootElmt) {
+			var elements = rootElmt ? rootElmt : document.getElementsByTagName('*'),
+				myCss    = {};
+			Array.from(elements).forEach(elmt => {
+				Array.from(window.getComputedStyle(elmt, null)).forEach((css) => {
+					if (!myCss.hasOwnProperty(elmt.nodeName)) myCss[elmt.nodeName] = {};
+					myCss[elmt.nodeName][css] = window.getComputedStyle(elmt, null).getPropertyValue(css);
+				})
+			});
+			myCss = JSON.stringify(myCss).replace(/((?<!\\)[\\"{}]|(?<="\s*)[,])/gmi, mtch =>
+				mtch == '"' ? ' ' : mtch == ',' ? ';\n\t' : mtch == '}' ? `;\n\t${mtch}` : mtch != '\\' ? `${mtch}\n\t` : ''
+			) + '\n';
+			//console.log('logg : ', myCss);
+
+		}
+
+		window.addEventListener('load', function () {
+
+			/*	Cr.importScript('components/tools/Tools.js');
+				Cr.importScript('components/tools/Hughug.js')	;
+	*/
+		/*	var myCss = getCalculatedCss()
+		 console.log('logg : ', myCss  );*/
+
+			var html = `<!DOCTYPE html>
+					<html>
+					<head><meta charset="utf-8">
+					<title>Ma page test</title>
+					</head>
+
+					<body>	<hr>
+
+					<p>Voici ma page web</p>
+					<hr>
+					<span>{{hello}}</span><br/>
+
+					1<br>
+					{{if myvar=="toto"}}
+					<span>condition OK!</span><br/>
+					<span>{{hello}}</span><br/>
+					 <span>{{demain}}</span><br/>
+					{{else}}
+					<span>condition REJECT!</span><br/>{{include widget.html}}
+					<span>{{"hello"}}</span><br/>
+					<span>{{demain}}</span><br/>
+					<span>{{"hello"}}</span><br/>
+					{{/if}}
+					<hr>
+					2<br>
+					{{if myvar=="ttooto"}}
+					<span>condition OK!</span><br/>
+					<span>{{hello}}</span><br/>
+					 <span>{{demain}}</span><br/>
+					{{else}}
+					<span>condition REJECT!</span><br/>
+					<span>{{hello}}</span><br/>
+					<span>{{demain}}</span><br/>
+					<span>{{"hello"}}</span><br/>{{/if}}
+					<hr>
+					3<br>
+					{{if arrMyvar.indexOf("azerty")!=-1}}
+
+					<span>condition 1 OK!</span><br/>
+					<span>{{hello}}</span><br/>
+					 <span>{{arrMyvar}}</span><br/>
+					<span>not  else</span><br/>
+					<span>{{"hello"}}</span><br/>
+						{{elseif arrMyvar.indexOf("azerty")!=-1}}
+
+						<span>type de condition :else if</span>	 <br/>
+						<span>condition 2 OK!</span><br/>
+					<span>{{demain}}</span><br/>
+					<span>{{"hello"}}</span><br/>
+					{{else}}
+					<span>condition REJECT!</span><br/>
+					<span>{{hello}}</span><br/>
+					<span>{{demain}}</span><br/>
+					<span>{{"hello"}}</span><br/>
+					{{/if}}
+					<hr>
+					4<br>
+					<table border="1" cellpadding="3" cellspacing="3"><tbody>
+					{{loop myvar}}
+					<tr><td>{{myvar}}</td></tr>
+					{{/loop}}
+					</tbody></table>
+					<hr>
+					5<br>
+					<table border="1" cellpadding="3" cellspacing="3" bgcolor="#a9a9a9"><tbody>
+					{{loop myvarBis}}
+					<tr><td>{{myvarBis.name}}</td><td>{{myvarBis.name}}</td></tr>
+					{{/loop}}
+					</tbody></table>
+					</body>
+					</html>`;
+
+			var data =
+					{
+						myvar   : ["toazazto", "aaaaaaaaaaa", "azerty", "qhfdjhfgdcjhq", "123456789"],
+						myvarBis: [{
+							lastName: "sssssssssss",
+							name    : "fddfdffdfd",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "mppmmppmpmpm", info: "azerty"}, {
+							lastName: "toazazto",
+							name    : "klkllklklk",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "wswswswswsw", info: "azerty"}, {
+							lastName: "toazazto",
+							name    : "xwwxxwxwxw",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "szzszsszszsz", info: "azerty"}, {
+							lastName: "fffffffffff",
+							name    : "popopopopo",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "ininininnini", info: "azerty"}, {
+							lastName: "toazazto",
+							name    : "kjkjkjkjkj",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "annanananana", info: "azerty"}, {
+							lastName: "uretrtrttru",
+							name    : "uyuyuyuyuy",
+							info    : "azerty"
+						}, {lastName: "toazazto", name: "nbbnbnnbnb", info: "azerty"}],
+						hello   : "----->il fait beau !!",
+						arrMyvar: {a: "toazazto", b: "aaaaaaaaaaa", c: "azerty"},
+						demain  : " ---->c'est un autre jours !",
+						arrMyvar: ["toazazto", "aaaaaaaaaaa", "azerty"]
+					};
+
+			var hug = new Hughug();
+			html = hug.perform(html, data);
+
+			document.body.innerXHTML = html;
+
+		})
+	</script>
+
+
+</head>
+aa
+<body>
+<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+</body>
+</html>

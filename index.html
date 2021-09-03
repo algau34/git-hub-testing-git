@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Title</title>
+	<link rel="stylesheet" href="main.css"><link rel="stylesheet" href="Common.css">
+	<script src="components/tools/Tools.js"  ></script>
+	<script src="components/tools/DOM-extd.js"></script>
+	<script src="components/pop-up/define.js"  ></script>
+
+
+
+</head>
+<body>
+<spnav-pop-info id="mypopin_modal-dlg" title="shut down the device?"  width="35%"  show="true">
+	<!-- none, error, timer, warning, success, info, valid, input, wait, progress-->
+	<PrimaryMessage type="error"  > Do you really want to shut down the device?...
+	 </PrimaryMessage>
+	<secondaryMessage>
+		This will shutdown the device ,...
+	</secondaryMessage>
+
+	<button id= "wsCM_dialog_noBtn"    value= "No" />
+	<button id= "wsCM_dialog_yesBtn"    value=" Yes"/>
+	<button id= "wsCM_dialog_cancelBtn"    value=" cancel"/>
+</spnav-pop-info>
+
+<div class="Modal_Screen_On" ></div>
+</body>
+</html>

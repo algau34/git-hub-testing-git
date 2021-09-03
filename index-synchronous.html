@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="main-synch.css">
+	<script type="text/javascript">
+		/*		var obs = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						console.log(mutation.addedNodes  + ' nodes added');
+
+					});
+				});
+				obs.observe(window , { childList: true });*/
+
+
+
+		var  html = '<img onload="alert(\'img\')" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" >' +
+				   '<div class="box-1" id="box-1" ></div>' +
+				   '<div class="box-2" onload="alert(\'div.box-2\');" ></div>' +
+				   '<div class="box-3" ></div>';
+
+		window.onload=function(){
+			document.body.innerHTML = html;
+			document.body.querySelector('.box-3').onload=  alert.bind(null,"div.box-3")
+
+			let eLoad =new Event('load');
+			document.body.querySelectorAll('*').forEach(elmt=>elmt.dispatchEvent(eLoad))
+
+		}
+	</script>
+
+
+</head>
+<body>
+
+
+</body>
+</html>
+

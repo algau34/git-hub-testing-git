@@ -1,0 +1,72 @@
+[
+	[
+		[ "", "²", "", 1, true, false ],
+		[ "1", "&", "", 1, true, false ],
+		[ "2", "é", "~", 1, true, false ],
+		[ "3", "\"", "#", 1, true, false ],
+		[ "4", "'", "{", 1, true, false ],
+		[ "5", "(", "[", 1, true, false ],
+		[ "6", "-", "|", 1, true, false ],
+		[ "7", "è", "`", 1, true, false ],
+		[ "8", "_", "\\", 1, true, false ],
+		[ "9", "ç", "^", 1, true, false ],
+		[ "0", "à", "@", 1, true, false ],
+		[ "°", ")", "]", 1, true, false ],
+		[ "+", "=", "}", 1, true, false ],
+		[ "", "", "", 2.5, true, "backspace" ]
+	],
+	[
+		[ "", "", "", 2, false, false ],
+		[ "A", "", "", 1, true, false ],
+		[ "Z", "", "", 1, true, false ],
+		[ "E", "", "€", 1, true, false ],
+		[ "R", "", "", 1, true, false ],
+		[ "T", "", "", 1, true, false ],
+		[ "Y", "", "", 1, true, false ],
+		[ "U", "", "", 1, true, false ],
+		[ "I", "", "", 1, true, false ],
+		[ "O", "", "", 1, true, false ],
+		[ "P", "", "", 1, true, false ],
+		[ "¨", "^", "", 1, true, false ],
+		[ "£", "$", "¤", 1, true, false ],
+		[ "", "", "", 2, false, false ]
+	],
+	[
+		[ "", "", "", 2.5, true, "lock" ],
+		[ "Q", "", "", 1, true, false ],
+		[ "S", "", "", 1, true, false ],
+		[ "D", "", "", 1, true, false ],
+		[ "F", "", "", 1, true, false ],
+		[ "G", "", "", 1, true, false ],
+		[ "H", "", "", 1, true, false ],
+		[ "J", "", "", 1, true, false ],
+		[ "K", "", "", 1, true, false ],
+		[ "L", "", "", 1, true, false ],
+		[ "M", "", "", 1, true, false ],
+		[ "%", "ù", "", 1, true, false ],
+		[ "µ", "*", "", 1, true, false ],
+		[ "", "", "", 1, false, false ]
+	],
+	[
+		[ "", "", "", 2, true, "shift" ],
+		[ ">", "<", "", 1, true, false ],
+		[ "W", "", "", 1, true, false ],
+		[ "X", "", "", 1, true, false ],
+		[ "C", "", "", 1, true, false ],
+		[ "V", "", "", 1, true, false ],
+		[ "B", "", "", 1, true, false ],
+		[ "N", "", "", 1, true, false ],
+		[ "?", ",", "", 1, true, false ],
+		[ ".", ";", "", 1, true, false ],
+		[ "/", ":", "", 1, true, false ],
+		[ "§", "!", "", 1, true, false ],
+		[ "", "", "", 3, true, "shift" ]
+	],
+	[
+		[ "", "", "", 1, false, false ],
+		[ "", "", "", 2, true, "alt" ],
+		[ " ", "", "", 8, true, false ],
+		[ "", "", "", 2, true, "alt" ],
+		[ "", "", "", 1, false, false ]
+	]
+]

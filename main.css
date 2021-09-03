@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    font-family:  Arial;
+}
+
+body *::first-letter {
+    text-transform: uppercase;
+}
+body * {
+    box-sizing: border-box;
+    outline: none;
+
+}
+
+
+:root {
+    font-size: 3.1vh; /*  font-size: 21pt; width 1440 / height:900 --> 2.5vh = 900*0.025 = 22.5px*/
+
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+
+
+
+
+    --text-color-title: #244c73;
+    --menu-bg-color: #0b264e;
+    --wrapper-bg-color: rgba(43, 76, 112, 0.8);
+    --global-bg-color: #244c73;
+    --info-text-color: #ffffff;
+    --button-border-color: #ffffff;
+    --border-color-dlg: #ffffff;
+    --button-font-color: #ffffff;
+    --button-font-weight: normal;
+    --button-border-width: 1px;
+    --button-border-radius: 8px;
+    --background-button-color: #2b4c70d5;
+    --bg-color-widget: #0883c6;
+    --tabs-bg-color: #3181da;
+    --tabs-bg-color-hover: #2a5880;
+    --width-border-color-count: #f3f3f300;
+    --width-border-top-color-count: #3498db;
+
+    --selection-exam-hover: rgba(255, 255, 255, 0.25);
+    --selection-exam-selected: rgba(255, 255, 255, 0.25);
+    --selection-exam-error-hover: #ff2a0071;
+    --selection-exam-error-selected: #ff2a0071;
+    --selection-exam-warning-hover: #ffbb006c;
+    --selection-exam-warning-selected: #ffbb006c;
+
+    /**   tackers  */
+
+    /*----- ANIM -----------*/
+    --thickness-min-anim-count: 0.04rem;
+    --thickness-max-anim-count: 1.3rem;
+    --thickness-max-anim-count-small: 0.7rem;
+    --thickness-min-anim-count-small: 0.05rem;
+}
+
+
+input[type=text],
+select,
+textarea {
+    width: 100%;
+    border: 0.08rem solid rgb(255, 255, 255);
+    border-radius: 10px;
+    resize: vertical;
+    background: none;
+    color: white;
+    height: 3.5vh;
+    background: #244c73;
+    font-size: 0.7rem;
+    line-height: 1rem;
+}
+
+form {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+button {
+    background: inherit;
+    color: inherit;
+    border: none;
+    font: inherit;
+}
+
+
+
+
+
+
+
+/*--------------------------------------------------------*/
+
+
+.Opacity {
+    filter: opacity(0.2);
+}
+
+.Invisible {
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+.btn-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.40;
+}
+
+
+
