@@ -55,7 +55,7 @@
 	"encoding": "utf8",
 	"recurse": true,
 	"verbose": true,
-	"template": "./node_modules/"
+	"template": "./node_modules/docdash"
 
   }
 }

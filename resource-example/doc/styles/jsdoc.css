@@ -96,8 +96,8 @@ h4.name {
   color: rgb(6, 5, 5);
   background: #88889047;
   font-weight: bold;
-  box-shadow: 0 0.25em 0.5em #7e839494;
-  border-top: 1px solid #d3d3d3;
+  /* box-shadow: 0 0.25em 0.5em #7e839494; */
+  /* border-top: 1px solid #d3d3d3; */
   border-bottom: 1px solid #d3d3d3;
   margin: 1.5em 0px 0.5em 16px;
   padding: .75em 0 .75em 10px;
@@ -136,9 +136,9 @@ header h2 {
   padding: 5px;
   color: rgb(0, 0, 62);
   /* border-radius: 9px; */
-  border: 1px solid #0036fd26;
+  /* border: 1px solid #0036fd26; */
   font-weight: 600;
-  box-shadow: 1px 1px 10px #333;
+  /* box-shadow: 1px 1px 10px #333; */
   width: 44vw;
 }
 
@@ -252,12 +252,14 @@ nav {
 nav #nav-search{
   width: 210px;
   height: 30px;
-  padding: 3px 4px;
+  padding: 3px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 6px;
   margin-right: 20px;
   margin-top: 20px;
+  font-size: 15px;
+  border: 1px solid #aaa;
 }
 
 nav.wrap a{
@@ -547,13 +549,21 @@ thead tr, thead tr {
   color: #4D4E53;
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
   font-size: 100%;
+  /* border-right: 1px solid #ddd; */
 }
 
 .params td {
   border-top: 1px solid #d7d8dc;
   padding: 5px;
+  border-right: 1px solid #ddd;
 }
-
+.params td:first-child {
+  width: 100px;
+  /* border-right: 1px solid #ddd; */
+}
+.params td:nth-child(2) {
+  width: 150px;
+}
 .params td.description > p:first-child, .props td.description > p:first-child {
   margin-top: 0;
   padding-top: 0;
@@ -677,7 +687,7 @@ dl.param-type {
   transform: scale(0.75);
 }
 
-/* ÃƒÆ’Ã¢â‚¬â€ and + */
+/* ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and + */
 .nav-trigger:checked + label.plus .navicon,
 .nav-trigger:checked + label.x .navicon {
   background: transparent;
