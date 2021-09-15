@@ -7,21 +7,17 @@
  * Time: 18:35
  */
 
-/**
- *
- * @type {addCSSRuleInJson}
- */
-StyleSheet.prototype.addCSSRuleInJson=addCSSRuleInJson;
-CSSStyleSheet.prototype.addCSSRuleInJson=addCSSRuleInJson;
+
 
 /**
  * add CSS Rule in Json in style Sheet
  * @param json
  * @param index
  */
-	function addCSSRuleInJson( json, index){
+CSSStyleSheetExtd.prototype.addCSSRuleInJson=
+function  addCSSRuleInJson ( json, index){
 	//grid-template-areas//((?<=\:").+("?=,))|
-		var sheet= this;
+	var sheet= this;
 	var rule =JSON.transformToCss(json.rule),
 		selector = json.selector;
 
@@ -31,4 +27,11 @@ CSSStyleSheet.prototype.addCSSRuleInJson=addCSSRuleInJson;
 		sheet.addRule(selector, rule.replace(/(;)/gm,'$1\n') ,index);
 	}
 
-}
+};
+
+
+/**
+ *
+ * @type {addCSSRuleInJson}
+ */
+StyleSheet.prototype.addCSSRuleInJson=addCSSRuleInJson;

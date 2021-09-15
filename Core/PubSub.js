@@ -6,39 +6,38 @@
  * Date: 09/07/2021
  * Time: 14:59
  */
+
 /**
- * Copyright (c) 2010,2011,2012,2013,2014 Morgan Roderick http://roderick.dk
- * License: MIT - http://mrgnrdrck.mit-license.org
- *
- * https://github.com/mroderick/PubSubJS
+ * class PubSub
+ * @classdesc publish subscribe
  */
 class PubSub {
 
 	/**
-	 *
+	 * @memberOf PubSub
 	 * @type {{}}
 	 */
 	static messages = {};
 
 	/**
-	 *
+	 * @memberOf PubSub
 	 * @type {number}
 	 */
 	static lastUid = -1;
 
 	/**
-	 *
+	 * @memberOf PubSub
 	 * @type {string}
 	 */
 	static ALL_SUBSCRIBING_MSG = '*';
 
 	/**
-	 *
+	 * @memberOf PubSub
 	 * @type {boolean}
 	 */
 	static immediateExceptions = true;
 	/**
-	 *
+	 * @memberOf PubSub
 	 */
 	static  instance;
 
@@ -59,7 +58,7 @@ class PubSub {
 	 * singleton
 	 * @returns {*}
 	 */
-	static get _getInstance(){
+	static get getInstance(){
 		if (PubSub.instance == null) {
 			PubSub.instance = new PubSub ();
 			// Hide the constructor so the returned object can't be new'd...
@@ -67,13 +66,12 @@ class PubSub {
 		}
 		return PubSub.instance;
 	}
+
 	/**
-	 * Publishes the message synchronously, passing the data to it's subscribers
-	 * @function
-	 * @alias publishSync
-	 * @param { String } message The message to publish
-	 * @param {} data The data to pass to subscribers
-	 * @return { Boolean }
+	 *  Publishes the message synchronously, passing the data to it's subscribers
+	 * @param message
+	 * @param data
+	 * @returns {*|Boolean}
 	 */
  static publishSync  ( message, data ){
 		return PubSub.publish( message, data, true,   PubSub.immediateExceptions );
@@ -81,11 +79,9 @@ class PubSub {
 
 	/**
 	 * Subscribes the passed function to the passed message. Every returned token is unique and should be stored if you need to unsubscribe
-	 * @function
-	 * @alias subscribe
-	 * @param { String } message The message to subscribe to
-	 * @param { Function } func The function to call when a new message is published
-	 * @return { String }
+	 * @param message
+	 * @param func
+	 * @returns {string|boolean}
 	 */
  static subscribe  ( message, func ){
 		if ( typeof func !== 'function'){
@@ -111,19 +107,17 @@ class PubSub {
 	/**
 	 *
 	 * @param func
-	 * @returns {*|String}
+	 * @returns {string|boolean}
 	 */
  static subscribeAll  ( func ){
 		return PubSub.subscribe(PubSub.ALL_SUBSCRIBING_MSG, func);
 	};
 
 	/**
-	 * Subscribes the passed function to the passed message once
-	 * @function
-	 * @alias subscribeOnce
-	 * @param { String } message The message to subscribe to
-	 * @param { Function } func The function to call when a new message is published
-	 * @return { PubSub }
+	 *  Subscribes the passed function to the passed message once
+	 * @param message
+	 * @param func
+	 * @returns {PubSub}
 	 */
  static subscribeOnce  ( message, func ){
 		var token = PubSub.subscribe( message, function(){
@@ -136,20 +130,14 @@ class PubSub {
 
 	/**
 	 * Clears all subscriptions
-	 * @function
-	 * @public
-	 * @alias clearAllSubscriptions
 	 */
  static clearAllSubscriptions  (){
 		PubSub.messages = {};
 	};
 
 	/**
-	 * Clear subscriptions by the topic
-	 * @function
-	 * @public
-	 * @alias clearAllSubscriptions
-	 * @return { int }
+	 *  Clear subscriptions by the topic
+	 * @param topic
 	 */
  static clearSubscriptions  (topic){
 		var m;
@@ -161,11 +149,9 @@ class PubSub {
 	};
 
 	/**
-       Count subscriptions by the topic
-	 * @function
-	 * @public
-	 * @alias countSubscriptions
-	 * @return { Array }
+	 * Count subscriptions by the topic
+	 * @param topic
+	 * @returns {number}
 	 */
  static countSubscriptions  (topic){
 		var m;
@@ -185,10 +171,9 @@ class PubSub {
 
 
 	/**
-       Gets subscriptions by the topic
-	 * @function
-	 * @public
-	 * @alias getSubscriptions
+	 * Gets subscriptions by the topic
+	 * @param topic
+	 * @returns {string[]}
 	 */
  static getSubscriptions  (topic){
 		return Object.keys(PubSub.messages);
@@ -202,17 +187,16 @@ class PubSub {
 	 * - When passed a function, removes all subscriptions for that function
 	 *
 	 * - When passed a topic, removes all subscriptions for that topic (hierarchy)
-	 * @function
-	 * @public
-	 * @alias subscribeOnce
-	 * @param { String | Function } value A token, function or topic to unsubscribe from
 	 * @example // Unsubscribing with a token
-	 * var token = PubSub.subscribe('mytopic', myFunc);
 	 * PubSub.unsubscribe(token);
+	 * var token = PubSub.subscribe('mytopic', myFunc);
 	 * @example // Unsubscribing with a function
 	 * PubSub.unsubscribe(myFunc);
 	 * @example // Unsubscribing from a topic
 	 * PubSub.unsubscribe('mytopic');
+	 *
+	 * @param value
+	 * @returns {boolean} A token, function or topic to unsubscribe from
 	 */
  static unsubscribe  (value){
 		var descendantTopicExists = (topic)=> {
@@ -263,7 +247,10 @@ class PubSub {
 	};
 
 	/**
-	 * @private methods
+	 * test if pubSub has one key
+	 * @param obj
+	 * @returns {boolean}
+	 * @private
 	 */
 	_hasKeys(obj){
 		var key;
@@ -277,10 +264,9 @@ class PubSub {
 	}
 
 	/**
-	 * Returns a _that throws the passed exception, for use as argument for setTimeout
-	 * @alias throwException
-	 * @function
+	 *  Returns a _that throws the passed exception, for use as argument for setTimeout
 	 * @param { Object } ex An Error object
+	 * @private
 	 */
 	_throwException( ex ){
 	 throw ex.toString();
@@ -341,7 +327,7 @@ class PubSub {
 	 * @param message
 	 * @param data
 	 * @param immediateExceptions
-	 * @returns {deliverNamespaced}
+	 * @returns {Function|null}
 	 * @private
 	 */
 	_createDeliveryFunction( message, data, immediateExceptions ){
@@ -424,15 +410,13 @@ class PubSub {
 	}
 	/**
 	 * Publishes the message, passing the data to it's subscribers
-	 * @function
-	 * @alias publish
 	 * @param { String } message The message to publish
 	 * @param {} data The data to pass to subscribers
 	 * @return { Boolean }
 	 */
 
 	static publish ( message, data ){
-		return  PubSub._getInstance._publish ( message, data, false, PubSub.immediateExceptions );
+		return  PubSub.getInstance._publish ( message, data, false, PubSub.immediateExceptions );
 	};
 
 }

@@ -26,6 +26,13 @@ var StringExtd=!StringExtd? String:StringExtd;
  * @classdesc Specialisation of Array.prototype
  */
 var ArrayExtd=!ArrayExtd ? Array:ArrayExtd;
+
+/**
+ * @constructor
+ * @hideconstructor
+ * @classdesc Spécialisation de document
+ */
+var documentExtd=!documentExtd? document:documentExtd;
 /**
  * "get" if a combination of "find" with a potential
  * insertion in case of missing entry
@@ -66,12 +73,7 @@ StringExtd.prototype.isHTML = function () {
 
 
 
-/**
- * @constructor
- * @hideconstructor
- * @classdesc Spécialisation de document
- */
-var documentExtd=!documentExtd? document:documentExtd;
+
 
 /**
  * transform a string Html to DomHTML

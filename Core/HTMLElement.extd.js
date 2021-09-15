@@ -9,24 +9,53 @@
 
 /**
  * get all js in html and return array of script js
- * @returns {[]}
+ * @param loadJs {Boolean} load the js  if true else just the source
+ * @param forceRemove {Boolean}
+ * @returns {*[]}
  */
-HTMLElement.prototype.getJs=function(){
-	var xhtml=this.outerHTML;
-
-
-	var js = [...xhtml.matchAll(/(\<script\s[^\>]*\>)([\S\s]*)(\<\/script\>)/gmi)];
-	var allJs=[];
-	if(js.length!=0) js.forEach( (js)=>{
-		if(js){
-			if( /\ssrc\=['"][^'"]+['"]/gmi.test(js[1])) {
-				var  file= js[1].match(/(\ssrc\=\s?['"])([^'"]+)(['"]\s?)/)[2];
-				var response= Cr.getFile(file ) ;
-				if(response) allJs.push( response );
-			} else if(js[2])  allJs.push(js[2]);
-		}
-	});
+HTMLElementExtd.prototype.getJs=function(loadJs = false,forceRemove=false){
+	var allJs=[],
+		scripts= this.querySelectorAll('script');
+	if(scripts.length!=0) {
+		scripts.forEach(    script=>{
+			if(script.hasAttribute('src'))  {
+				var src=script.getAttribute('src');
+				var js =loadJs ? Cr.getFile(src):src;
+				allJs.push( js ) ;
+			}else {
+				allJs.push(script.textContent );
+			}
+			if( forceRemove==true && this.contains(script))   script.parentNode.removeChild(script);
+		} )
+	}
 	return allJs;
+}
+
+/**
+ * move all StyleSheet contains in context(this)
+ * in target (document head by default)
+ *
+ * @target {HTMLElement}
+ */
+HTMLElementExtd.prototype.moveStyleSheet=function(target = document.head ){
+	var  links= this.querySelectorAll('link');
+	if(links.length!=0) {//isEqualNode(
+		var hrefsOfHead =  [...target.querySelectorAll('link') ].map(_link=>_link.href),
+			firstNodeScript = target.querySelectorAll('script').item(0);
+		links.forEach(link=>{
+			var linkHref =link.href;
+			if( hrefsOfHead.indexOf(linkHref)==-1) {
+				if(firstNodeScript) {
+					target.insertBefore(link ,firstNodeScript); } else {
+					target.appendChild(link);
+				}
+				hrefsOfHead.push(linkHref);
+			} else  if( this.contains(link) )   {
+				link.parentNode.removeChild(link);
+			}
+		});
+	}
+	return this;
 }
 
 
@@ -35,7 +64,7 @@ HTMLElement.prototype.getJs=function(){
  * @param forceRemove
  * @returns {*[]}
  */
-HTMLElement.prototype.getCss=function(forceRemove=false){
+HTMLElementExtd.prototype.getCss=function(forceRemove=false){
 	var allCss=[],
 		links= this.querySelectorAll('link');
 	if(links.length!=0) links.forEach(link=>{
@@ -53,7 +82,7 @@ HTMLElement.prototype.getCss=function(forceRemove=false){
  * calculated  style of each element
  * @returns {{}}
  */
-HTMLElement.prototype.getCalculatedCss=function(  ){
+HTMLElementExtd.prototype.getCalculatedCss=function(  ){
 	var elements =this ? this: document.getElementsByTagName('*'),
 		myCss={};
 	Array.from( elements).forEach(elmt=> {
@@ -65,16 +94,7 @@ HTMLElement.prototype.getCalculatedCss=function(  ){
 	});
 	return myCss;
 }
-/**
- *
- * @param cssSelector
- * @param callBack
- * @returns {*}
- */
-String.prototype.performOnStrHTMLBySelector = function (cssSelector, callBack = null) {
-	var documentFragment = new DOMParser().parseFromString(this, 'text/html');
-	var elmt = documentFragment.querySelector(cssSelector);
-	if (callBack) callBack.call(elmt);
-	var HTML = documentFragment.documentElement.innerXHTML;
-	return HTML;
-}
+
+
+
+

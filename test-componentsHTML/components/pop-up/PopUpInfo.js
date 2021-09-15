@@ -22,7 +22,7 @@ window.PopUpInfo_=class PopUpInfo extends HTMLElement {
 		// attach the created elements to the shadow dom
 		var wrapper= shadow.appendChild(wrapper);
 		this._assignDom(wrapper );
-		shadow.documentElement.getCalculatedCss( )
+		shadow.getCalculatedCss( )
 	}
 
 	/**

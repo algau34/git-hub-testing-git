@@ -12,7 +12,7 @@
  * @param json
  * @returns {string}
  */
-JSON.transformToCss=function(json){
+JSONExtd.transformToCss=function(json){
 	return JSON.stringify(json ).replace(/((?<!\\)[\\"{}]|(?<="\s*)[,])/gmi, mtch=>
 		mtch=='"' ? ' ':mtch==',' ? ';\n\t':mtch=='}' ? `;\n\t${mtch}` : mtch!='\\' ?`${mtch}\n\t`:''
 	)+'\n' ;

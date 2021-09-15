@@ -15,7 +15,7 @@
  * @param _defaultObject
  * @returns {*}
  */
-Array.prototype.get = function( _fnFind, _defaultObject ){
+ArrayExtd.prototype.get = function( _fnFind, _defaultObject ){
 	const object = this.find( _fnFind );
 	return object != null ? object : this[ this.push( _defaultObject ) - 1 ];
 }

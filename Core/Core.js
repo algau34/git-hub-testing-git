@@ -7,6 +7,10 @@
  * Time: 19:04
  */
 
+/**
+ * class Cr
+ * @classdesc class Cr core
+ */
  class Cr {
 
 	/**
@@ -46,7 +50,7 @@
 	 * @param _path
 	 */
 	static importScript(_path){
-		let code =  Cr.getFile(_path   );
+		let code =  Cr.getFile(_path );
 		code =code.replace(/^[\u00BB\u00BF\uFEFF\t\r\n\v]+/gm,"");
 		window.eval (  '\n'+code+';');
 
@@ -57,14 +61,17 @@
 
 
 (function(Cr){
-	var fScrs=['JSON.extd.js',
+	var dirsHref=window.location.href.split('/');
+	dirsHref.pop(),	dirsHref.pop();
+	var fScrs=['Init.Object.extd.js',
+			   'JSON.extd.js',
 			   'Document.extd.js',
 			   'HTMLElement.extd.js',
 			   'DOM.extd.js',
 			   'Array.extd.js',
 			   'String.extd.js',
 			   'Sheet.extd.js'];
-	fScrs.forEach(fScr=>Cr.importScript('Core/'+fScr))
+	fScrs.forEach(fScr=>Cr.importScript('../Core/'+fScr));
 })(Cr)
 
 

@@ -14,7 +14,7 @@
  * @param whParent
  * @returns {CSSStyleSheet|StyleSheet}
  */
-document.createStyleSheet=function(whParent=document.head ){
+documentExtd.createStyleSheet=function(whParent=document.head ){
 	var styleTag = document.createElement ("style");
 	styleTag.setAttribute('type','text/css');
 	whParent.appendChild (styleTag);
@@ -27,9 +27,9 @@ document.createStyleSheet=function(whParent=document.head ){
 /**
  * transform a string Html to DomHTML
  * @param htmlOrPath
- * @returns {Document}
+ * @returns {documentExtd}
  */
-document.transformXHTMLToDom=function(xhtmlOrPath ) {
+documentExtd.transformXHTMLToDom=function(xhtmlOrPath ) {
 	var html =/\.(html?)|(xml)$/.test(xhtmlOrPath) ? Cr.getFile( xhtmlOrPath ):xhtmlOrPath;
 	var DOM = new DOMParser();
 	var doc = DOM.parseFromString(html , "text/html");

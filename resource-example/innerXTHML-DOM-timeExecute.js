@@ -37,7 +37,7 @@ HTMLElementExtd.prototype.getJs=function(loadJs = false,forceRemove=false){
  *
  * @target {HTMLElement}
  */
-	HTMLElementExtd.prototype.moveStyleSheet=function(target = document.head ){
+HTMLElementExtd.prototype.moveStyleSheet=function(target = document.head ){
 	var  links= this.querySelectorAll('link');
 	if(links.length!=0) {//isEqualNode(
 		var hrefsOfHead =  [...target.querySelectorAll('link') ].map(_link=>_link.href),
