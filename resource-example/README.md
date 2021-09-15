@@ -4,6 +4,10 @@
 Installation and Usage
 ----------------------
 
+**Install :**
+
+`npm install --save-dev jsdoc`
+
 **Usage :**
 
 `"node.exe" node_modules/jsdoc/jsdoc.js 
@@ -12,9 +16,6 @@ mainline\CppWebUIDll\resource
 -r -d mainline\CppWebUIDll\resource/doc/ 
 --verbose`
 
-**Install :** 
- 
-`npm install --save-dev jsdoc`
 
 --------------------------------------------------------
 **_important_** :
