@@ -34,10 +34,11 @@ var Hughug=class Hughug  {
 		var regexInclude=/\{{2}include\s+([^}]+)\s*\}{2}/gm;
 		var binds = [...xhtml.matchAll(regexInclude)];
 		if(binds.length!=0)  {
+			console.log('logg : ',  Cr.getPresentUrl( true ));
 
 			binds.forEach( (bind)=>{
 				var file =bind[1];
-				var response= Cr.getFile(file,false ) ;
+				var response=  Cr.getFile(  file ) ;
 				if(regexInclude.test(response)) response= this._includeXHTML(response);
 				xhtml = xhtml.replace(regexInclude,response);
 			})

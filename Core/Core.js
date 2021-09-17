@@ -36,13 +36,13 @@ class Cr {
 	 * @param _relativeHref force relative url target
 	 * @returns {string}
 	 */
-	static getFile(file, _relativeHref = true) {
-		if (!_relativeHref) file = Cr.targetUrl + file;
+	static getFile(file) {
 		var page = file.split(/\//).pop();
 		var wait = setTimeout(() => {
 			throw new Error("Time out load js : " + page + "!")
 		}, 2500);
 		const request = new XMLHttpRequest();
+		file = Cr.getPresentUrl(true) + file;
 		request.open("GET", file, false);
 		request.send();
 		var res = (() => {
@@ -64,15 +64,41 @@ class Cr {
 		let code = Cr.getFile(_path);
 		code = code.replace(/^[\u00BB\u00BF\uFEFF\t\r\n\v]+/gm, "");
 		window.eval('\n' + code + ';');
-
 	}
 
+	/*	if(stack[0]=="Error") { // Chromium (\b[^\s]+\s\b)?(\bhttp(s?)\:\/\/\b)?
+		var m;
+		if(m=stack[stack.length-1].match(/(http(s?)\:\/\/[^\?\#]*\.js$)/im)){
+			var files = m.pop().split(/\//);
+			if(dir) files.pop() ;
+			__FILE__ =files.join('/');
+		}
+
+	}
+	console.log('__FILE__ : ',__FILE__);*/
+	/**
+	 *
+	 * @param dir
+	 * @returns {string}
+	 */
+	static getPresentUrl(dir = false) {
+		var stack    = ((new Error).stack).split("\n"),
+			__FILE__ = "not Found";
+		if (stack[0] == "Error") { // Chromium
+			var m;
+			if (m = stack[stack.length - 1].match(/(https?[^\?\#]*\.[a-z]{2,4})/im)) {
+				var files = m.pop().split(/\//), f;
+				__FILE__ = [(f = files.pop()) && !dir ? f : ''].concat(files.reverse()).reverse().join('/');
+			}
+		}
+		return __FILE__;
+	}
 }
 
-
+/**
+ *
+ */
 (function (Cr) {
-	var dirsHref = window.location.href.split('/');
-	dirsHref.pop();
 	var fScrs = ['Init.Object.extd.js',
 				 'Document.extd.js',
 				 'HTMLElement.extd.js',
@@ -81,7 +107,7 @@ class Cr {
 				 'Array.extd.js',
 				 'String.extd.js',
 				 'Sheet.extd.js'];
-	fScrs.forEach(fScr => Cr.importScript(dirsHref.join('/') + '/Core/' + fScr));
+	fScrs.forEach(fScr => Cr.importScript(fScr));
 })(Cr)
 
 

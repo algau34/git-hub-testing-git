@@ -9,7 +9,7 @@
 
 
 window.addEventListener('load',function(){
-Cr.importScript('../modal-pop-up/pop-up.js');
+Cr.importScript(    'pop-up.js' );
  customElements.define('my-modalpopin',  PopUpInfo);
 // Define the new element
 })
