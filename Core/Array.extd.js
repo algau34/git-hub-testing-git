@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
- * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Project: define-newElementHTML - myProject
+ * User: algau34
+ * Mail: al.gau@free.fr
  * Date: 30/06/2021
  * Time: 19:23
  */
@@ -15,7 +15,7 @@
  * @param _defaultObject
  * @returns {*}
  */
-ArrayExtd.prototype.get = function( _fnFind, _defaultObject ){
-	const object = this.find( _fnFind );
-	return object != null ? object : this[ this.push( _defaultObject ) - 1 ];
+ArrayExtd.prototype.get = function (_fnFind, _defaultObject) {
+	const object = this.find(_fnFind);
+	return object != null ? object : this[this.push(_defaultObject) - 1];
 }

@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: mySpineNav - spineNav
+ * Project: mymyProject - myProject
  * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Mail: al.gau@free.fr
  * Date: 31/12/2020
  * Time: 14:45
  */

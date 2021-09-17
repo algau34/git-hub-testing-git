@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
+ * Project: define-newElementHTML - myProject
  * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Mail: al.gau@free.fr
  * Date: 16/08/2021
  * Time: 12:05
  */

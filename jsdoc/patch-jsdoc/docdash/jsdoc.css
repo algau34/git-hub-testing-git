@@ -465,7 +465,9 @@ footer {
 
 .prettyprint > code {
   padding: 15px;
+  width:fit-content
 }
+
 
 .prettyprint .linenums code {
   padding: 0 15px

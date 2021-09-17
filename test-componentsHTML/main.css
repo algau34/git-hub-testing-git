@@ -2,6 +2,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: black;
+    background-image: url("https://jcsatanas.fr/wp-content/uploads/2016/03/fond-ecran-villes-de-nuit-iphone-7.jpg");
+    background-size: contain;
     font-family:  Arial;
 }
 

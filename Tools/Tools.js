@@ -1,14 +1,14 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
+ * Project: define-newElementHTML - myProject
  * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Mail: al.gau@free.fr
  * Date: 11/06/2021
  * Time: 11:09
  */
 
 /**
- *
+ * Tools
  * @type {Tools}
  */
 var Tools=class Tools {

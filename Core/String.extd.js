@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
- * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Project: define-newElementHTML - myProject
+ * User: algau34
+ * Mail: al.gau@free.fr
  * Date: 30/06/2021
  * Time: 19:23
  */
@@ -16,9 +16,10 @@
  * @returns {string}
  */
 //
-StringExtd.prototype.splice = function( _idx, _rem, _str ){
-	return this.slice( 0, _idx ) + _str + this.slice( _idx + Math.abs( _rem ) );
+StringExtd.prototype.splice = function (_idx, _rem, _str) {
+	return this.slice(0, _idx) + _str + this.slice(_idx + Math.abs(_rem));
 };
+
 /**
  *
  * @param cssSelector
@@ -31,4 +32,23 @@ StringExtd.prototype.performOnStrHTMLBySelector = function (cssSelector, callBac
 	if (callBack) callBack.call(elmt);
 	var HTML = documentFragment.documentElement.innerXHTML;
 	return HTML;
+}
+
+/**
+ * shuffle letter of string char
+ *
+ * @returns {*}
+ */
+StringExtd.prototype.shuffle = function () {
+	return this.split("").sort(function (a, b) {
+		return (Math.random() < 0.5 ? 1 : -1);
+	}).join("");
+}
+/**
+ * Test if string is HTML
+ *
+ * @returns {boolean}
+ */
+String.prototype.isHTML = function () {
+	return /<\/?[^>]*>/i.test(this);
 }

@@ -9,26 +9,45 @@
 
 	<script src="../Core/Core.js"  ></script>
 	<script src="../Tools/Tools.js"  ></script>
+	<script src="components/modal-pop-up/index.js"  ></script>
 
-	<script src="components/pop-up/define.js"  ></script>
 
+	<script type="application/javascript">
+		window.addEventListener('load',function(){
+			var theModalPopin=document.querySelector('#mypopin_modal-dlg');
+			var targetNodePrimaryMessage =  theModalPopin.querySelector('PrimaryMessage:first-of-type');
+			var targetNodeSecondaryMessage =  theModalPopin.querySelector('SecondaryMessage:first-of-type');
+			var iconsStatus = ["timer","warning","question","info","error","success","progress","valid","wait","input"];
+			clearInterval();
+			setInterval(()=>{
+				var  iconStatus = iconsStatus.pop();
+				targetNodePrimaryMessage.setAttribute('type',iconStatus )
+				targetNodePrimaryMessage.innerText=iconStatus+"..."+iconStatus;
+				targetNodeSecondaryMessage.innerText=iconStatus.shuffle();
+				iconsStatus.unshift(iconStatus);
 
+			},1000);
+		})
+
+	</script>
 
 </head>
 <body>
-<spnav-pop-info id="mypopin_modal-dlg" title="shut down the device?"  width="35%"  show="true">
+<my-modalpopin id="mypopin_modal-dlg" title="shut down the device?"  width="35%"  show="true">
 	<!-- none, error, timer, warning, success, info, valid, input, wait, progress-->
-	<PrimaryMessage type="error"  > Do you really want to shut down the device?...
+	<PrimaryMessage type="success"  > Do you really want to shut down the device?...
 	 </PrimaryMessage>
-	<secondaryMessage>
+	<SecondaryMessage>
 		This will shutdown the device ,...
-	</secondaryMessage>
+	</SecondaryMessage>
 
 	<button id= "wsCM_dialog_noBtn"    value= "No" />
 	<button id= "wsCM_dialog_yesBtn"    value=" Yes"/>
 	<button id= "wsCM_dialog_cancelBtn"    value=" cancel"/>
-</spnav-pop-info>
+</my-modalpopin>
 
 <div class="Modal_Screen_On" ></div>
+
+
 </body>
 </html>

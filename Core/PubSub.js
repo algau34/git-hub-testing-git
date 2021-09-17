@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
- * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Project: define-newElementHTML - myProject
+ * User: algau34
+ * Mail: al.gau@free.fr
  * Date: 09/07/2021
  * Time: 14:59
  */
@@ -47,20 +47,20 @@ class PubSub {
 	 * @param ALL_SUBSCRIBING_MSG
 	 * @param immediateExceptions
 	 */
-	constructor( lastUid= -1, ALL_SUBSCRIBING_MSG= '*', immediateExceptions= true) {
+	constructor(lastUid = -1, ALL_SUBSCRIBING_MSG = '*', immediateExceptions = true) {
 
-		PubSub.ALL_SUBSCRIBING_MSG=ALL_SUBSCRIBING_MSG;
-		PubSub.lastUid=lastUid;
-	    PubSub.immediateExceptions=immediateExceptions ;
+		PubSub.ALL_SUBSCRIBING_MSG = ALL_SUBSCRIBING_MSG;
+		PubSub.lastUid = lastUid;
+		PubSub.immediateExceptions = immediateExceptions;
 	}
 
 	/**
 	 * singleton
 	 * @returns {*}
 	 */
-	static get getInstance(){
+	static get getInstance() {
 		if (PubSub.instance == null) {
-			PubSub.instance = new PubSub ();
+			PubSub.instance = new PubSub();
 			// Hide the constructor so the returned object can't be new'd...
 			PubSub.instance.constructor = null;
 		}
@@ -73,8 +73,8 @@ class PubSub {
 	 * @param data
 	 * @returns {*|Boolean}
 	 */
- static publishSync  ( message, data ){
-		return PubSub.publish( message, data, true,   PubSub.immediateExceptions );
+	static publishSync(message, data) {
+		return PubSub.publish(message, data, true, PubSub.immediateExceptions);
 	};
 
 	/**
@@ -83,15 +83,15 @@ class PubSub {
 	 * @param func
 	 * @returns {string|boolean}
 	 */
- static subscribe  ( message, func ){
-		if ( typeof func !== 'function'){
+	static subscribe(message, func) {
+		if (typeof func !== 'function') {
 			return false;
 		}
 
 		message = (typeof message === 'symbol') ? message.toString() : message;
 
 		// message is not registered yet
-		if ( !Object.prototype.hasOwnProperty.call( PubSub.messages, message ) ){
+		if (!Object.prototype.hasOwnProperty.call(PubSub.messages, message)) {
 			PubSub.messages[message] = {};
 		}
 
@@ -109,7 +109,7 @@ class PubSub {
 	 * @param func
 	 * @returns {string|boolean}
 	 */
- static subscribeAll  ( func ){
+	static subscribeAll(func) {
 		return PubSub.subscribe(PubSub.ALL_SUBSCRIBING_MSG, func);
 	};
 
@@ -119,11 +119,11 @@ class PubSub {
 	 * @param func
 	 * @returns {PubSub}
 	 */
- static subscribeOnce  ( message, func ){
-		var token = PubSub.subscribe( message, function(){
+	static subscribeOnce(message, func) {
+		var token = PubSub.subscribe(message, function () {
 			// before func apply, unsubscribe message
-			PubSub.unsubscribe( token );
-			func.apply( this, arguments );
+			PubSub.unsubscribe(token);
+			func.apply(this, arguments);
 		});
 		return PubSub;
 	};
@@ -131,7 +131,7 @@ class PubSub {
 	/**
 	 * Clears all subscriptions
 	 */
- static clearAllSubscriptions  (){
+	static clearAllSubscriptions() {
 		PubSub.messages = {};
 	};
 
@@ -139,10 +139,10 @@ class PubSub {
 	 *  Clear subscriptions by the topic
 	 * @param topic
 	 */
- static clearSubscriptions  (topic){
+	static clearSubscriptions(topic) {
 		var m;
-		for (m in PubSub.messages){
-			if (Object.prototype.hasOwnProperty.call(PubSub.messages, m) && m.indexOf(topic) === 0){
+		for (m in PubSub.messages) {
+			if (Object.prototype.hasOwnProperty.call(PubSub.messages, m) && m.indexOf(topic) === 0) {
 				delete PubSub.messages[m];
 			}
 		}
@@ -153,14 +153,14 @@ class PubSub {
 	 * @param topic
 	 * @returns {number}
 	 */
- static countSubscriptions  (topic){
+	static countSubscriptions(topic) {
 		var m;
 		// eslint-disable-next-line no-unused-vars
 		var token;
 		var count = 0;
-		for (m in  PubSub.messages) {
-			if (Object.prototype.hasOwnProperty.call( PubSub.messages, m) && m.indexOf(topic) === 0) {
-				for (token in  PubSub.messages[m]) {
+		for (m in PubSub.messages) {
+			if (Object.prototype.hasOwnProperty.call(PubSub.messages, m) && m.indexOf(topic) === 0) {
+				for (token in PubSub.messages[m]) {
 					count++;
 				}
 				break;
@@ -175,7 +175,7 @@ class PubSub {
 	 * @param topic
 	 * @returns {string[]}
 	 */
- static getSubscriptions  (topic){
+	static getSubscriptions(topic) {
 		return Object.keys(PubSub.messages);
 	};
 
@@ -198,34 +198,34 @@ class PubSub {
 	 * @param value
 	 * @returns {boolean} A token, function or topic to unsubscribe from
 	 */
- static unsubscribe  (value){
-		var descendantTopicExists = (topic)=> {
+	static unsubscribe(value) {
+		var descendantTopicExists = (topic) => {
 				var m;
-				for ( m in PubSub.messages ){
-					if ( Object.prototype.hasOwnProperty.call(PubSub.messages, m) && m.indexOf(topic) === 0 ){
+				for (m in PubSub.messages) {
+					if (Object.prototype.hasOwnProperty.call(PubSub.messages, m) && m.indexOf(topic) === 0) {
 						// a descendant of the topic exists:
 						return true;
 					}
 				}
 				return false;
 			},
-			isTopic    = typeof value === 'string' && ( Object.prototype.hasOwnProperty.call(PubSub.messages, value) ||
-														descendantTopicExists(value) ),
-			isToken    = !isTopic && typeof value === 'string',
-			isFunction = typeof value === 'function',
-			result = false,
+			isTopic               = typeof value === 'string' && (Object.prototype.hasOwnProperty.call(PubSub.messages, value) ||
+																  descendantTopicExists(value)),
+			isToken               = !isTopic && typeof value === 'string',
+			isFunction            = typeof value === 'function',
+			result                = false,
 			m, message, t;
 
-		if (isTopic){
+		if (isTopic) {
 			PubSub.clearSubscriptions(value);
 			return;
 		}
 
-		for ( m in PubSub.messages ){
-			if ( Object.prototype.hasOwnProperty.call( PubSub.messages, m ) ){
+		for (m in PubSub.messages) {
+			if (Object.prototype.hasOwnProperty.call(PubSub.messages, m)) {
 				message = PubSub.messages[m];
 
-				if ( isToken && message[value] ){
+				if (isToken && message[value]) {
 					delete message[value];
 					result = value;
 					// tokens are unique, so we can just stop here
@@ -233,8 +233,8 @@ class PubSub {
 				}
 
 				if (isFunction) {
-					for ( t in message ){
-						if (Object.prototype.hasOwnProperty.call(message, t) && message[t] === value){
+					for (t in message) {
+						if (Object.prototype.hasOwnProperty.call(message, t) && message[t] === value) {
 							delete message[t];
 							result = true;
 						}
@@ -252,11 +252,11 @@ class PubSub {
 	 * @returns {boolean}
 	 * @private
 	 */
-	_hasKeys(obj){
+	_hasKeys(obj) {
 		var key;
 
-		for (key in obj){
-			if ( Object.prototype.hasOwnProperty.call(obj, key) ){
+		for (key in obj) {
+			if (Object.prototype.hasOwnProperty.call(obj, key)) {
 				return true;
 			}
 		}
@@ -268,8 +268,8 @@ class PubSub {
 	 * @param { Object } ex An Error object
 	 * @private
 	 */
-	_throwException( ex ){
-	 throw ex.toString();
+	_throwException(ex) {
+		throw ex.toString();
 	}
 
 	/**
@@ -279,11 +279,11 @@ class PubSub {
 	 * @param data
 	 * @private
 	 */
-	_callSubscriberWithDelayedExceptions( subscriber, message, data ){
+	_callSubscriberWithDelayedExceptions(subscriber, message, data) {
 		try {
-			subscriber( message, data );
-		} catch( ex ){
-			setTimeout( this._throwException( ex ), 0);
+			subscriber(message, data);
+		} catch (ex) {
+			setTimeout(this._throwException(ex), 0);
 		}
 	}
 
@@ -294,8 +294,8 @@ class PubSub {
 	 * @param data
 	 * @private
 	 */
-	_callSubscriberWithImmediateExceptions( subscriber, message, data ){
-		subscriber( message, data );
+	_callSubscriberWithImmediateExceptions(subscriber, message, data) {
+		subscriber(message, data);
 	}
 
 	/**
@@ -306,18 +306,18 @@ class PubSub {
 	 * @param immediateExceptions
 	 * @private
 	 */
-	_deliverMessage( originalMessage, matchedMessage, data, immediateExceptions ){
-		var subscribers = PubSub.messages[matchedMessage],
+	_deliverMessage(originalMessage, matchedMessage, data, immediateExceptions) {
+		var subscribers    = PubSub.messages[matchedMessage],
 			callSubscriber = immediateExceptions ? this._callSubscriberWithImmediateExceptions : this._callSubscriberWithDelayedExceptions,
 			s;
 
-		if ( !Object.prototype.hasOwnProperty.call( PubSub.messages, matchedMessage ) ) {
+		if (!Object.prototype.hasOwnProperty.call(PubSub.messages, matchedMessage)) {
 			return;
 		}
 
-		for (s in subscribers){
-			if ( Object.prototype.hasOwnProperty.call(subscribers, s)){
-				callSubscriber( subscribers[s], originalMessage, data );
+		for (s in subscribers) {
+			if (Object.prototype.hasOwnProperty.call(subscribers, s)) {
+				callSubscriber(subscribers[s], originalMessage, data);
 			}
 		}
 	}
@@ -330,19 +330,19 @@ class PubSub {
 	 * @returns {Function|null}
 	 * @private
 	 */
-	_createDeliveryFunction( message, data, immediateExceptions ){
-		return  ()=>{
-			var topic = String( message ),
-				position = topic.lastIndexOf( '.' );
+	_createDeliveryFunction(message, data, immediateExceptions) {
+		return () => {
+			var topic    = String(message),
+				position = topic.lastIndexOf('.');
 
 			// deliver the message as it is now
 			this._deliverMessage(message, message, data, immediateExceptions);
 
 			// trim the hierarchy and deliver message to each level
-			while( position !== -1 ){
-				topic = topic.substr( 0, position );
+			while (position !== -1) {
+				topic = topic.substr(0, position);
 				position = topic.lastIndexOf('.');
-				this._deliverMessage( message, topic, data, immediateExceptions );
+				this._deliverMessage(message, topic, data, immediateExceptions);
 			}
 
 			this._deliverMessage(message, PubSub.ALL_SUBSCRIBING_MSG, data, immediateExceptions);
@@ -355,9 +355,9 @@ class PubSub {
 	 * @returns {boolean}
 	 * @private
 	 */
-	_hasDirectSubscribersFor( message ) {
-		var topic = String( message ),
-			found = Boolean(Object.prototype.hasOwnProperty.call( PubSub.messages, topic ) && this._hasKeys(PubSub.messages[topic]));
+	_hasDirectSubscribersFor(message) {
+		var topic = String(message),
+			found = Boolean(Object.prototype.hasOwnProperty.call(PubSub.messages, topic) && this._hasKeys(PubSub.messages[topic]));
 
 		return found;
 	}
@@ -368,14 +368,14 @@ class PubSub {
 	 * @returns {boolean}
 	 * @private
 	 */
-	_messageHasSubscribers( message ){
-		var topic = String( message ),
-			found = this._hasDirectSubscribersFor(topic) || this._hasDirectSubscribersFor(PubSub.ALL_SUBSCRIBING_MSG),
-			position = topic.lastIndexOf( '.' );
+	_messageHasSubscribers(message) {
+		var topic    = String(message),
+			found    = this._hasDirectSubscribersFor(topic) || this._hasDirectSubscribersFor(PubSub.ALL_SUBSCRIBING_MSG),
+			position = topic.lastIndexOf('.');
 
-		while ( !found && position !== -1 ){
-			topic = topic.substr( 0, position );
-			position = topic.lastIndexOf( '.' );
+		while (!found && position !== -1) {
+			topic = topic.substr(0, position);
+			position = topic.lastIndexOf('.');
 			found = this._hasDirectSubscribersFor(topic);
 		}
 
@@ -391,23 +391,24 @@ class PubSub {
 	 * @returns {boolean}
 	 * @private
 	 */
-	_publish( message, data, sync, immediateExceptions ){
+	_publish(message, data, sync, immediateExceptions) {
 		message = (typeof message === 'symbol') ? message.toString() : message;
 
-		var deliver = this._createDeliveryFunction( message, data, immediateExceptions ),
-			hasSubscribers = this._messageHasSubscribers( message );
+		var deliver        = this._createDeliveryFunction(message, data, immediateExceptions),
+			hasSubscribers = this._messageHasSubscribers(message);
 
-		if ( !hasSubscribers ){
+		if (!hasSubscribers) {
 			return false;
 		}
 
-		if ( sync === true ){
+		if (sync === true) {
 			deliver();
 		} else {
-			setTimeout( deliver, 0 );
+			setTimeout(deliver, 0);
 		}
 		return true;
 	}
+
 	/**
 	 * Publishes the message, passing the data to it's subscribers
 	 * @param { String } message The message to publish
@@ -415,8 +416,8 @@ class PubSub {
 	 * @return { Boolean }
 	 */
 
-	static publish ( message, data ){
-		return  PubSub.getInstance._publish ( message, data, false, PubSub.immediateExceptions );
+	static publish(message, data) {
+		return PubSub.getInstance._publish(message, data, false, PubSub.immediateExceptions);
 	};
 
 }

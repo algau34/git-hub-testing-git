@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: define-newElementHTML - spineNav
+ * Project: define-newElementHTML - myProject
  * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Mail: al.gau@free.fr
  * Date: 30/06/2021
  * Time: 14:47
  */
@@ -10,7 +10,7 @@
 
 
 /**
- *
+ * @classdesc engine template
  * @type {Hughug}
  */
 var Hughug=class Hughug  {
@@ -37,7 +37,7 @@ var Hughug=class Hughug  {
 
 			binds.forEach( (bind)=>{
 				var file =bind[1];
-				var response= Cr.getFile(file ) ;
+				var response= Cr.getFile(file,false ) ;
 				if(regexInclude.test(response)) response= this._includeXHTML(response);
 				xhtml = xhtml.replace(regexInclude,response);
 			})

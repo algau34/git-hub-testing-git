@@ -13,40 +13,40 @@
  * @classdesc  Specialisation of HTMLElement.prototype
  * @type {{prototype: HTMLElement, new(): HTMLElement}}
  */
-var HTMLElementExtd=!HTMLElementExtd ? HTMLElement:HTMLElementExtd;
+var HTMLElementExtd = !HTMLElementExtd ? HTMLElement : HTMLElementExtd;
 /**
  * @constructor
  * @hideconstructor
  * @classdesc Spécialisation de String.prototype
  */
-var StringExtd=!StringExtd? String:StringExtd;
+var StringExtd = !StringExtd ? String : StringExtd;
 /**
  * @constructor
  * @hideconstructor
  * @classdesc Specialisation of Array.prototype
  */
-var ArrayExtd=!ArrayExtd ? Array:ArrayExtd;
+var ArrayExtd = !ArrayExtd ? Array : ArrayExtd;
 /**
  * @constructor
  * @hideconstructor
  * @classdesc Specialisation of Object.prototype
  */
-var ObjectExtd=!ObjectExtd ? Object:ObjectExtd;
+var ObjectExtd = !ObjectExtd ? Object : ObjectExtd;
 /**
  * @constructor
  * @hideconstructor
- * @classdesc Specialisation of Object.prototype
+ * @classdesc Specialisation of JSON
  */
-var JSONExtd=!JSONExtd ? JSON:JSONExtd;
+var JSONExtd = !JSONExtd ? JSON : JSONExtd;
 /**
  * @constructor
  * @hideconstructor
- * @classdesc Specialisation of Object.prototype
+ * @classdesc Specialisation of CSSStyleSheet.prototype
  */
-var CSSStyleSheetExtd=!CSSStyleSheetExtd ? CSSStyleSheet:CSSStyleSheetExtd;
+var CSSStyleSheetExtd = !CSSStyleSheetExtd ? CSSStyleSheet : CSSStyleSheetExtd;
 /**
  * @constructor
  * @hideconstructor
- * @classdesc Spécialisation de document
+ * @classdesc Spécialisation of document
  */
-var documentExtd=!documentExtd? document:documentExtd;
+var documentExtd = !documentExtd ? document : documentExtd;

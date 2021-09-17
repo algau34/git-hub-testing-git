@@ -1,8 +1,8 @@
 /**
  * Created by jetbrains web development IDE ( Web/PhpStorm ).
- * Project: mySpineNav - spineNav
+ * Project: mymyProject - myProject
  * User: Pascal Gaudin
- * Mail: pascal.gaudin@zimmerbiomet.com
+ * Mail: al.gau@free.fr
  * Date: 31/12/2020
  * Time: 11:46
  */
@@ -60,16 +60,14 @@ StringExtd.prototype.splice = function (_idx, _rem, _str) {
 	return this.slice(0, _idx) + _str + this.slice(_idx + Math.abs(_rem));
 };
 
-
 /**
  * Test if string is HTML
  *
- * @returns {boolean} return true if HTML , else  return false
+ * @returns {boolean}
  */
-StringExtd.prototype.isHTML = function () {
+String.prototype.isHTML=function() {
 	return /<\/?[^>]*>/i.test(this);
 }
-
 
 
 

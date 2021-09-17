@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<script src="Core/Core.js" ></script>
-	<script src="components/tools/Tools.js"  ></script>
-	<script src="components/tools/Hughug.js"  ></script>
+	<script src="../experimental-code_js/Core/Core.js" ></script>
+	<script src="../experimental-code_js/Tools/Tools.js"></script>
+	<script src="../experimental-code_js/Tools/Hughug.js"></script>
 	<script>
 		function getCalculatedCss(rootElmt) {
 			var elements = rootElmt ? rootElmt : document.getElementsByTagName('*'),
@@ -49,7 +49,7 @@
 					<span>{{hello}}</span><br/>
 					 <span>{{demain}}</span><br/>
 					{{else}}
-					<span>condition REJECT!</span><br/>{{include widget.html}}
+					<span>condition REJECT!</span><br/>{{include /widget.html}}
 					<span>{{"hello"}}</span><br/>
 					<span>{{demain}}</span><br/>
 					<span>{{"hello"}}</span><br/>
@@ -144,6 +144,7 @@
 
 		})
 	</script>
+
 
 
 </head>
