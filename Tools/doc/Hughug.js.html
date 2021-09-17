@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Hughug.js - Documentation</title><meta property="og:title" content=""/><meta property="og:type" content="website"/><meta property="og:image" content=""/><meta property="og:url" content=""/><script src="scripts/prettify/prettify.js"></script><script src="scripts/prettify/lang-css.js"></script><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><link type="text/css" rel="stylesheet" href="styles/prettify.css"><link type="text/css" rel="stylesheet" href="styles/jsdoc.css"><script src="scripts/nav.js" defer></script><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><input type="checkbox" id="nav-trigger" class="nav-trigger" /><label for="nav-trigger" class="navicon-button x"><div class="navicon"></div></label><label for="nav-trigger" class="overlay"></label><nav class="wrap"><input type="text" id="nav-search" placeholder="Search" /><h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Hughug.html">Hughug</a><ul class='methods'><li data-type='method' title='perform of Hughug'  style='display: none;'><a href="Hughug.html#perform">perform</a></li></ul></li><li><a href="Tools.html">Tools</a><ul class='methods'><li data-type='method' title='getStyleSheet of Tools'  style='display: none;'><a href="Tools.html#.getStyleSheet">getStyleSheet</a></li><li data-type='method' title='importStyleSheetInXHTMLElement of Tools'  style='display: none;'><a href="Tools.html#.importStyleSheetInXHTMLElement">importStyleSheetInXHTMLElement</a></li></ul></li></ul></nav><div id="main"><h1 class="page-title">Hughug.js</h1><section><article><pre class="prettyprint source linenums"><code>/**
+ * Created by jetbrains web development IDE ( Web/PhpStorm ).
+ * Project: define-newElementHTML - myProject
+ * User: Pascal Gaudin
+ * Mail: al.gau@free.fr
+ * Date: 30/06/2021
+ * Time: 14:47
+ */
+
+
+
+/**
+ * @classdesc engine template
+ * @type {Hughug}
+ */
+var Hughug=class Hughug  {
+
+	/**
+	 *
+	 */
+	constructor() {
+
+
+	}
+
+	/**
+	 *
+	 * @param xhtml
+	 * @param data
+	 * @returns {string}
+	 * @private
+	 */
+	_includeXHTML(xhtml,data){
+		var regexInclude=/\{{2}include\s+([^}]+)\s*\}{2}/gm;
+		var binds = [...xhtml.matchAll(regexInclude)];
+		if(binds.length!=0)  {
+
+			binds.forEach( (bind)=>{
+				var file =bind[1];
+				var response= Cr.getFile(file,false ) ;
+				if(regexInclude.test(response)) response= this._includeXHTML(response);
+				xhtml = xhtml.replace(regexInclude,response);
+			})
+		}
+		return xhtml;
+	}
+
+	/**
+	 *
+	 * @param xhtml
+	 * @param data
+	 * @returns {*}
+	 * @private
+	 */
+	_dataXHTML(xhtml,data) {
+		var regexData=/\{{2}\s*([^}]+)\s*\}{2}/gm;
+			 [...xhtml.matchAll(regexData)].forEach((bind)=> {
+				var key = bind[1].trim();
+				if( data.hasOwnProperty( key ) ) {
+					if(data[key] instanceof Array) data[key]='['+data[key].join(',')+']';
+					if(data[key] instanceof Object)  data[key]= JSON.stringify(data[key] )  ;
+					var replRegex=new RegExp("\{{2}" + key +"\}{2}","gm");
+					xhtml  = xhtml.replace(replRegex , data[key]);
+				}
+			});
+			xhtml   = xhtml.replace(/(\{{2}\s*["']?([^"']+)["']\s*?\}{2})/gm, "$2");
+		return xhtml  ;
+	}
+
+	/**
+	 *
+	 * @param xhtml
+	 * @param data
+	 * @returns {*}
+	 * @private
+	 */
+	_loopXHTML(xhtml,data) {
+		xhtml=xhtml.replace(/[\t\r\n\v]+/,'');
+		var regexVar= bind =>new RegExp("\{{2}\s*" + bind + "\s*\}{2}","gm" );
+		var regexLoop=/(\{{2}loop\s+([^}]+)\s*\}{2})(([\s\S]*?)(\{{2}\/loop\s*\}{2}))/gm;
+		[... xhtml.matchAll( regexLoop)].forEach( bind => {
+			var partXhtml="" ;
+
+			if(data.hasOwnProperty(bind[2]) &amp;&amp; data[bind[2]] instanceof Array) {
+				data[bind[2]].forEach((value,index)=>{
+					partXhtml +=bind[4];
+					if(value instanceof Object==false) {
+						partXhtml =partXhtml.replace(regexVar(bind[2]),value);
+					}  else {
+						for(var k in value)	{
+							var sVar= regexVar(bind[2].toString()+"\."+ k.toString() );
+							partXhtml =partXhtml.replace(sVar , value[k] );
+						}
+					}
+				})
+			}
+			xhtml = xhtml.replace(bind[0],partXhtml);
+		});
+
+		return xhtml;
+	}
+
+	/**
+	 * @param xhtml
+	 * @param data
+	 * @returns {*}
+	 * @private
+	 */
+	_ifElseXHTML(xhtml,data){
+		xhtml=xhtml.replace(/[\t\r\n\v]*/gm,'');
+		var dataList= Object.keys(data),
+			myData = new RegExp("(" + dataList.join(")|(") + ")","gm") ;
+
+		var regexIf =/(\{{2}\s*(else)?(\s?(\/)?if(\s+[^}]+\s*)?)?\}{2})/gm;
+		var regexCond= /(\{{2}if\s+([^}]+)\s*\}{2})(([\s\S]*?)(\{{2}\/if\s*\}{2}))/gm
+		var  conds=[], ifs=[];
+		[...xhtml.matchAll(  regexIf )].forEach( bind => {
+
+			if(bind[5]||bind[2]) {
+				var stHtml=bind.index + bind[0].length,
+					pos={st:stHtml, ed: stHtml+xhtml.slice(stHtml).search(/\{{2}\s*((else)|(\/if))/)};
+				var cHtml={};
+				if(bind[5] ) cHtml.cond=bind[5].trim();
+				cHtml.html	= xhtml.slice(pos.st,pos.ed);
+				ifs.push(cHtml);
+			}
+			if(bind[3]=='/if') conds.push(ifs),ifs=[];
+		});
+
+		[...xhtml.matchAll(  regexCond )].forEach((bind,idx) => {
+			var  _blckHtmlCond,newCond;
+			if(conds.length!==0)while(  _blckHtmlCond=conds[idx].shift() ) {
+				if( _blckHtmlCond.hasOwnProperty('cond')) {
+					newCond = eval('()=>'+  _blckHtmlCond.cond.replace(myData,"data.$&amp;"))();
+					if(newCond !== true) continue;
+				}
+				if( _blckHtmlCond.hasOwnProperty('html')) {
+					xhtml=xhtml.replace(bind[0],  _blckHtmlCond.html);
+					break;
+				}
+			}
+		})
+		return xhtml;
+	}
+
+	/**
+	 *
+	 * @param html
+	 * @param data
+	 * @returns {*}
+	 */
+    perform(html,data){
+		html = this._includeXHTML(html);
+		html = this._ifElseXHTML(html,data );
+		html = this._loopXHTML(html, data);/**/
+		html = this._dataXHTML(html,data );
+		return html;
+	}
+}
+</code></pre></article></section></div><br class="clear"><footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Sep 16 2021 19:03:21 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer><script>prettyPrint();</script><script src="scripts/polyfill.js"></script><script src="scripts/linenumber.js"></script><script src="scripts/search.js" defer></script><script src="scripts/collapse.js" defer></script></body></html>
