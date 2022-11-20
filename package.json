@@ -1,0 +1,8 @@
+{
+  "name": "git-hub-testing-git",
+  "version": "1.0.0",
+  "dependencies": {
+    "docdash": "^2.0.0",
+    "jsdoc": "^4.0.0"
+  }
+}
